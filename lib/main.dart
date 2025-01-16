@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         ),
         home: MyHomePage(),
       ),
@@ -41,14 +41,19 @@ class MyHomePage extends StatelessWidget {
     var pair = appState.current;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Text('A random AWESOME SOME THING idea:'),
-          BigCard(pair: pair),
-          ElevatedButton(onPressed: () {
-            appState.getNext();
-          }, child: Text('Next'))
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BigCard(pair: pair),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                appState.getNext();
+              }, 
+              child: Text('Next'))
+          ],
+        ),
       ),
     );
   }
@@ -64,6 +69,24 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(pair.asLowerCase);
+    final theme = Theme.of(context);
+    final style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+      wordSpacing: 10,
+      fontSize: 40,
+    );
+
+    return Card(
+      color: theme.colorScheme.primary,
+      elevation: 10,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(
+          pair.asLowerCase, 
+          style: style,
+          semanticsLabel: '${pair.first} ${pair.second}',
+        ),
+      ),
+    );
   }
 }
