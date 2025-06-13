@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'favorites_app.dart';
+import 'counter.dart';
 
 void main() {
   runApp(Layout());
 }
 
 class Layout extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -68,6 +68,11 @@ class Layout extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                  Column(
+                    children: [
+                      MyCounter(),
+                    ],
                   )
                 ],
               );
